@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<empresa id="1">
+    <nombre>PATTO</nombre>
+    <servicio>Alimentación</servicio>
+    <telefono>673587231</telefono>
+        <clientes>
+            <cliente id="1">
+                <dni>30267456L</dni>
+                <nombre>David Pérez</nombre>
+                <telefono>689734567</telefono>
+                <localidad>Córdoba</localidad>
+                <edad>24</edad>
+                <premium>1</premium>
+            </cliente>
+
+            <cliente id="2">
+                <dni>67894321T</dni>
+                <nombre>Manuela Ruiz</nombre>
+                <telefono>671984508</telefono>
+                <localidad>Sevilla</localidad>
+                <edad>19</edad>
+                <premium>0</premium>
+            </cliente>
+
+            <cliente id="3">
+                <dni>45621092C</dni>
+                <nombre>Héctor Caro</nombre>
+                <telefono>764317543</telefono>
+                <localidad>Jaén</localidad>
+                <edad>47</edad>
+                <premium>0</premium>
+            </cliente>
+            
+            <cliente id="4">
+                <dni>89754308D</dni>
+                <nombre>Pepe Marín</nombre>
+                <telefono>645987032</telefono>
+                <localidad>Sevilla</localidad>
+                <edad>31</edad>
+                <premium>1</premium>
+            </cliente>
+
+            <cliente id="5">
+                <dni>45892134K</dni>
+                <nombre>Laura Gómez</nombre>
+                <telefono>612345678</telefono>
+                <localidad>Valencia</localidad>
+                <edad>28</edad>
+                <premium>0</premium>
+            </cliente>
+
+            <cliente id="6">
+                <dni>71238945M</dni>
+                <nombre>Carlos Fernández</nombre>
+                <telefono>689541230</telefono>
+                <localidad>Madrid</localidad>
+                <edad>42</edad>
+                <premium>1</premium>
+            </cliente>
+
+            <cliente id="7">
+                <dni>30984512R</dni>
+                <nombre>Lucía Torres</nombre>
+                <telefono>634789102</telefono>
+                <localidad>Granada</localidad>
+                <edad>25</edad>
+                <premium>0</premium>
+            </cliente>
+
+            <cliente id="8">
+                <dni>52341987P</dni>
+                <nombre>David Ruiz</nombre>
+                <telefono>677123904</telefono>
+                <localidad>Bilbao</localidad>
+                <edad>36</edad>
+                <premium>1</premium>
+            </cliente>
+        </clientes>
+
+        <empleados>
+            <empleado id="1">
+                <dni>56789213C</dni>
+                <nombre>Marcos López</nombre>
+                <telefono>789546754</telefono>
+                <localidad>Sevilla</localidad>
+                <edad>38</edad>
+                <puesto>Gestor</puesto>
+                <salario>1900</salario>
+            </empleado>
+            
+            <empleado id="2">
+                <dni>48912376K</dni>
+                <nombre>Elena Sánchez</nombre>
+                <telefono>712398456</telefono>
+                <localidad>Valencia</localidad>
+                <edad>29</edad>
+                <puesto>Comercial</puesto>
+                <salario>1550</salario>
+            </empleado>
+
+            <empleado id="3">
+                <dni>31245890M</dni>
+                <nombre>Javier Morales</nombre>
+                <telefono>745896123</telefono>
+                <localidad>Madrid</localidad>
+                <edad>45</edad>
+                <puesto>Mozo de almacén</puesto>
+                <salario>2000</salario>
+            </empleado>
+
+            <empleado id="4">
+                <dni>76543218R</dni>
+                <nombre>Carmen Navarro</nombre>
+                <telefono>789123450</telefono>
+                <localidad>Granada</localidad>
+                <edad>31</edad>
+                <puesto>Técnica</puesto>
+                <salario>1950</salario>
+            </empleado>
+
+            <empleado id="5">
+                <dni>89123456P</dni>
+                <nombre>Adrián Ortega</nombre>
+                <telefono>722345891</telefono>
+                <localidad>Bilbao</localidad>
+                <edad>50</edad>
+                <puesto>Especialista Marketing</puesto>
+                <salario>1750</salario>
+            </empleado>
+        </empleados>
+    </empresa>
