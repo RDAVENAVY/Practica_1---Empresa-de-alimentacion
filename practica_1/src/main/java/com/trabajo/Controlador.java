@@ -57,7 +57,23 @@ public class Controlador {
                     manipulador.crearEmpleado(vista.recogerNuevoEmpleado());
                     break;
 
+                case 8:
+                    manipulador.borrarCliente(vista.recogerClienteABorrar());
+                    break;
+                
+                case 9: 
+                    manipulador.borrarEmpleado(vista.recogerEmpleadoABorrar());
+                    break;
+                
+                case 10:
+                    manipulador.modificarEmpleado(vista.recogerEmpleadoAModificar());
+                    break;
+                
+                case 11:
+                    manipulador.modificarCliente(vista.recogerClienteAModificar());
+
                 case 0:
+                    vista.mostrarMensaje("Saliendo de la aplicación");
                     break;
             }
 
