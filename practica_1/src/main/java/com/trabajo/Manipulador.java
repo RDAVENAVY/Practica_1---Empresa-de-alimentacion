@@ -51,6 +51,15 @@ public class Manipulador {
 
     }
 
+    public static void leerEmpleados(File f) throws JAXBException{
+
+    }
+
+    public static void leerClientes(File f) throws JAXBException{
+
+    }
+
+
     public static void borrarEmpleado(Empleado Eborrar, File f) throws JAXBException, IOException{
 
     }
