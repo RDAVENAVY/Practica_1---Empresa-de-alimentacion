@@ -29,15 +29,33 @@ public class Controlador {
 
             switch (opcion) {
                 case 1:
-                    vista.mostrarEmpresa();
+                    vista.mostrarEmpresa(manipulador.leerEmpresa());
                     break;
                 case 2:
-                    vista.mostrarClientes();
+                    vista.mostrarClientes(manipilador.leerClientes);
                     break;
 
 
-                case 3: 
-                    
+                case 3:
+                    vista.mostrarCliente(manipulador.leerCliente());
+                    break;
+
+                case 4:
+                    vista.mostrarEmpleados(manipulador.leerEmpleados());
+                    break;
+                
+                case 5:
+                    vista.mostrarEmpleado(manipulador.leerEmpleado());
+                    break;
+                
+                case 6: 
+                  
+                    manipulador.crearCliente(vista.recogerNuevoCliente());
+                    break;
+
+                case 7: 
+                    manipulador.crearEmpleado(vista.recogerNuevoEmpleado());
+                    break;
 
                 case 0:
                     break;
