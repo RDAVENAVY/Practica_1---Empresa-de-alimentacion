@@ -1,7 +1,10 @@
 package com.trabajo;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlAttribute;
 
@@ -9,7 +12,13 @@ import javax.xml.bind.annotation.XmlAttribute;
 
 public class Empresa {
 
-	//Atributo id de la empresa
+	//Creo atributos clase empresa
+	private int id;
+    private String nombre;
+    private String servicio;
+    private String telefono;
+
+	//Atributo de la etiqueta id de la empresa
 	@XmlAttribute(name = "id")
 	public int getId() {
 		return id;
@@ -49,7 +58,19 @@ public class Empresa {
 		this.telefono = telefono;
 	}
 
-	
+	//Listado de clientes
+	@XmlElementWrapper(name = "clientes")
+    @XmlElement(name = "cliente")
+    private List<Cliente> clientes;
+
+	//Listado de empleados
+    @XmlElementWrapper(name = "empleados")
+    @XmlElement(name = "empleado")
+    private List<Empleado> empleados;
+
+	//Constructor vacío de empresa
+    public Empresa() {
+    }
 
 }
 	
