@@ -1,26 +1,17 @@
 package com.trabajo;
 
 
-import java.io.IOException;
-import java.util.List;
-import java.util.Scanner;
-
-
 public class Controlador {
     private Manipulador manipulador;
     private Vista vista;
 
     public Controlador(Manipulador manipulador, Vista vista) {
-        this.modelo = modelo;
+        this.manipulador = manipulador;
         this.vista = vista;
     }
 
-    // Método para iniciar el flujo de la aplicación
-    public void start() throws IOException {
-     
-    
   // Método para iniciar el flujo de la aplicación
-    public void start() throws IOException {
+    public void start(){
 
         int opcion;
 
@@ -31,10 +22,10 @@ public class Controlador {
                 case 1:
                     vista.mostrarEmpresa(manipulador.leerEmpresa());
                     break;
-                case 2:
-                    vista.mostrarClientes(manipilador.leerClientes);
-                    break;
 
+                case 2:
+                    vista.mostrarClientes(manipulador.leerClientes());
+                    break;
 
                 case 3:
                     vista.mostrarCliente(manipulador.leerCliente());
@@ -49,7 +40,6 @@ public class Controlador {
                     break;
                 
                 case 6: 
-                  
                     manipulador.crearCliente(vista.recogerNuevoCliente());
                     break;
 
@@ -71,9 +61,14 @@ public class Controlador {
                 
                 case 11:
                     manipulador.modificarCliente(vista.recogerClienteAModificar());
+                    break;
 
                 case 0:
                     vista.mostrarMensaje("Saliendo de la aplicación");
+                    break;
+
+                default:
+                    vista.mostrarMensaje("Opción no válida. Vuelva a introducir su opción deseada.");
                     break;
             }
 
