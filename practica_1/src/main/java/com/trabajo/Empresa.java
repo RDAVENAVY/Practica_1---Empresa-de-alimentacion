@@ -4,66 +4,22 @@ import java.util.ArrayList;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name = "empresa")
+
 public class Empresa {
-	
-	ArrayList<Persona> personas =new ArrayList<Persona>();
 
-	public Personas(ArrayList<Persona> personas) {
-		this.personas = personas;
-
-	}
-
-	public Personas() {
-	}
-
-	@XmlElement(name = "persona")
-	public ArrayList<Persona> getPersonas() {
-		return personas;
-	}
-
-	public void setPersonas(ArrayList<Persona> personas) {
-		this.personas = personas;
-	}
-	
-	
-	
-	
-
-}
-
-------
-
-
-
-@XmlRootElement(name = "persona")
-@XmlType(propOrder = { "id","nombre", "edad" })
-public class Persona {
-	
-	String id;
-	String nombre;
-	int edad;
-	
-	public Persona(String id, String nombre, int edad) {
-		this.id = id;
-		this.nombre = nombre;
-		this.edad = edad;
-	}
-	
-	public Persona() {
-	}
-
+	//Atributo id de la empresa
 	@XmlAttribute(name = "id")
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId( int id) {
 		this.id = id;
 	}
 
+	//Elemento nombre de la empresa
 	@XmlElement(name = "nombre")
 	public String getNombre() {
 		return nombre;
@@ -73,19 +29,28 @@ public class Persona {
 		this.nombre = nombre;
 	}
 
-	@XmlElement(name = "edad")
-	public int getEdad() {
-		return edad;
+	//Elemento Servicio
+	@XmlElement(name = "servicio")
+	public String getServicio() {
+		return servicio;
 	}
 
-	public void setEdad(int edad) {
-		this.edad = edad;
+	public void setServicio(String servicio) {
+		this.servicio = servicio;
 	}
-	
-	
-	
-	
+
+	//Elemento teléfono
+	@XmlElement(name = "telefono")
+	public String getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+
 	
 
 }
+	
 
