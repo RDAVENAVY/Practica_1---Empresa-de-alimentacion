@@ -3,6 +3,8 @@ package com.trabajo;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Scanner;
+
 
 public class Controlador {
     private Manipulador manipulador;
@@ -15,26 +17,36 @@ public class Controlador {
 
     // Método para iniciar el flujo de la aplicación
     public void start() throws IOException {
-     while (true) {
-            // Mostrar los libros actuales
-            List<Libro> libros = modelo.cargarLibrosDesdeArchivo();
-            vista.imprimirLibros(libros);
+     
+    
+  // Método para iniciar el flujo de la aplicación
+    public void start() throws IOException {
 
-            // Pedir detalles de un nuevo libro a través de la Vista
-            Libro nuevoLibro = vista.nuevoLibro();
+        int opcion;
 
-            // Agregar el nuevo libro al archivo de texto
-            modelo.guardarLibroEnArchivo(nuevoLibro);
+        do {
+            opcion = vista.mostrarMenu();
 
-            // Mostrar mensaje de confirmación
-            vista.mostrarMensaje("¡Libro añadido exitosamente!");
+            switch (opcion) {
+                case 1:
+                    vista.mostrarEmpresa();
+                    break;
+                case 2:
+                    vista.mostrarClientes();
+                    break;
 
-            // Volver a mostrar la lista actualizada de libros
-            libros = modelo.cargarLibrosDesdeArchivo();
-            vista.imprimirLibros(libros);
-        }
+
+                case 3: 
+                    
+
+                case 0:
+                    break;
+            }
+
+        } while (opcion != 0);
+    }
 
 
     }
-
 }
+
