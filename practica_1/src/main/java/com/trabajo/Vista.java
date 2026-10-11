@@ -1,0 +1,42 @@
+package com.trabajo;
+
+import java.util.*;
+
+public class Vista {
+
+
+private Scanner sc = new Scanner(System.in); 
+
+    public int mostrarMenu() {
+
+        System.out.println("\n===== GESTIÓN DE PATTO =====");
+        System.out.println("1. Mostrar datos de la empresa");
+        System.out.println("2. Mostrar todos los clientes");
+        System.out.println("3. Consultar un cliente");
+        System.out.println("4. Mostrar todos los empleados");
+        System.out.println("5. Consultar un empleado");
+        System.out.println("6. Añadir un cliente");
+        System.out.println("7. Añadir un empleado");
+        System.out.println("8. Borrar un cliente");
+        System.out.println("9. Borrar un empleado");
+        System.out.println("10. Modificar un empleado");
+        System.out.println("11. Modificar un cliente");
+        System.out.println("0. Salir");
+        System.out.print("Selecciona una opción: ");
+
+        while (!sc.hasNextInt()) {
+            System.out.println("Debes introducir un número.");
+            sc.nextLine();
+            System.out.print("Selecciona una opción: ");
+        }
+
+        int opcion = sc.nextInt();
+        sc.nextLine();
+
+        return opcion;
+    }
+
+    public void mostrarMensaje(String mensaje) {
+        System.out.println(mensaje);
+    }
+}
