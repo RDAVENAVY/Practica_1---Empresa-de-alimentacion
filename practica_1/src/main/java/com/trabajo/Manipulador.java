@@ -1,5 +1,5 @@
-package com.trabajo;
+package com.trabajo; 
 
 public class Manipulador {
-    
+    public
 }
