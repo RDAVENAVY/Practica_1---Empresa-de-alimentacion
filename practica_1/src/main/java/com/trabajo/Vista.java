@@ -65,4 +65,23 @@ private Scanner sc = new Scanner(System.in);
         System.out.println("Edad: " + cliente.getEdad());
         System.out.println("Premium: " + cliente.getPremium());
     }
+
+    public void mostrarEmpleados(List<Empleado> empleados) {
+        System.out.println("\n===== LISTADO DE EMPLEADOS =====");
+        for (Empleado empleado : empleados) {
+            mostrarEmpleado(empleado);
+            System.out.println("------------------------------");
+        }
+    }
+
+    public void mostrarEmpleado(Empleado empleado) {
+        System.out.println("ID: " + empleado.getId());
+        System.out.println("DNI: " + empleado.getDni());
+        System.out.println("Nombre: " + empleado.getNombre());
+        System.out.println("Teléfono: " + empleado.getTelefono());
+        System.out.println("Localidad: " + empleado.getLocalidad());
+        System.out.println("Edad: " + empleado.getEdad());
+        System.out.println("Puesto: " + empleado.getPuesto());
+        System.out.println("Salario: " + empleado.getSalario());
+    }
 }
