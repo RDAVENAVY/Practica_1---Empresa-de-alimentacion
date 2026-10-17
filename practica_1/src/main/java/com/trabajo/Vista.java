@@ -84,4 +84,49 @@ private Scanner sc = new Scanner(System.in);
         System.out.println("Puesto: " + empleado.getPuesto());
         System.out.println("Salario: " + empleado.getSalario());
     }
+
+    public Cliente recogerNuevoCliente() {
+        System.out.println("\n===== NUEVO CLIENTE =====");
+        System.out.print("ID: ");
+        int id = sc.nextInt();
+        sc.nextLine();
+        System.out.print("DNI: ");
+        String dni = sc.nextLine();
+        System.out.print("Nombre: ");
+        String nombre = sc.nextLine();
+        System.out.print("Teléfono: ");
+        String telefono = sc.nextLine();
+        System.out.print("Localidad: ");
+        String localidad = sc.nextLine();
+        System.out.print("Edad: ");
+        int edad = sc.nextInt();
+        System.out.print("Premium (1 = sí, 0 = no): ");
+        int premium = sc.nextInt();
+        sc.nextLine();
+        return new Cliente(id, dni, nombre, telefono, localidad, edad, premium);
+    }
+
+    public Empleado recogerNuevoEmpleado() {
+        System.out.println("\n===== NUEVO EMPLEADO =====");
+        System.out.print("ID: ");
+        int id = sc.nextInt();
+        sc.nextLine();
+        System.out.print("DNI: ");
+        String dni = sc.nextLine();
+        System.out.print("Nombre: ");
+        String nombre = sc.nextLine();
+        System.out.print("Teléfono: ");
+        String telefono = sc.nextLine();
+        System.out.print("Localidad: ");
+        String localidad = sc.nextLine();
+        System.out.print("Edad: ");
+        int edad = sc.nextInt();
+        sc.nextLine();
+        System.out.print("Puesto: ");
+        String puesto = sc.nextLine();
+        System.out.print("Salario: ");
+        double salario = sc.nextDouble();
+        sc.nextLine();
+        return new Empleado(id, dni, nombre, telefono, localidad, edad, puesto, salario);
+    }
 }
