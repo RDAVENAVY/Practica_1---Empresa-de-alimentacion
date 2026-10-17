@@ -39,4 +39,13 @@ private Scanner sc = new Scanner(System.in);
     public void mostrarMensaje(String mensaje) {
         System.out.println(mensaje);
     }
+
+    public void mostrarEmpresa(Empresa empresa) {
+        System.out.println("\n===== DATOS DE LA EMPRESA =====");
+        System.out.println("ID: " + empresa.getId());
+        System.out.println("Nombre: " + empresa.getNombre());
+        System.out.println("Servicio: " + empresa.getServicio());
+        System.out.println("Teléfono: " + empresa.getTelefono());
+    }
+    
 }
