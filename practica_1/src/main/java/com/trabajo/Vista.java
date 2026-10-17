@@ -143,4 +143,49 @@ private Scanner sc = new Scanner(System.in);
         sc.nextLine();
         return id;
     }
+
+    public Empleado recogerEmpleadoAModificar() {
+        System.out.println("\n===== MODIFICAR EMPLEADO =====");
+        System.out.print("ID del empleado que quieres modificar: ");
+        int id = sc.nextInt();
+        sc.nextLine();
+        System.out.print("Nuevo DNI: ");
+        String dni = sc.nextLine();
+        System.out.print("Nuevo nombre: ");
+        String nombre = sc.nextLine();
+        System.out.print("Nuevo teléfono: ");
+        String telefono = sc.nextLine();
+        System.out.print("Nueva localidad: ");
+        String localidad = sc.nextLine();
+        System.out.print("Nueva edad: ");
+        int edad = sc.nextInt();
+        sc.nextLine();
+        System.out.print("Nuevo puesto: ");
+        String puesto = sc.nextLine();
+        System.out.print("Nuevo salario: ");
+        double salario = sc.nextDouble();
+        sc.nextLine();
+        return new Empleado(id, dni, nombre, telefono, localidad, edad, puesto, salario);
+    }
+
+    public Cliente recogerClienteAModificar() {
+        System.out.println("\n===== MODIFICAR CLIENTE =====");
+        System.out.print("ID del cliente que quieres modificar: ");
+        int id = sc.nextInt();
+        sc.nextLine();
+        System.out.print("Nuevo DNI: ");
+        String dni = sc.nextLine();
+        System.out.print("Nuevo nombre: ");
+        String nombre = sc.nextLine();
+        System.out.print("Nuevo teléfono: ");
+        String telefono = sc.nextLine();
+        System.out.print("Nueva localidad: ");
+        String localidad = sc.nextLine();
+        System.out.print("Nueva edad: ");
+        int edad = sc.nextInt();
+        System.out.print("Premium (1 = sí, 0 = no): ");
+        int premium = sc.nextInt();
+        sc.nextLine();
+        return new Cliente(id, dni, nombre, telefono, localidad, edad, premium);
+    }
 }
