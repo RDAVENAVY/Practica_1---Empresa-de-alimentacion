@@ -1,217 +1,161 @@
-package com.trabajo; 
+package com.trabajo;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
-
 public class Manipulador {
-    public static void main(String[] args) throws JAXBException, IOException{
-        
-        File f=new File("proyecto.xml");
-        
-        leerEmpresa(f);
-        leerClientes(f);
-        leerEmpleados(f);
-        
-    }
 
-    public static void leerEmpresa(File f) throws JAXBException {
+    // Lee el archivo XML y lo convierte en un objeto Empresa para ser leido
+    public static Empresa leerEmpresa(File f) throws JAXBException {
         JAXBContext context = JAXBContext.newInstance(Empresa.class);
         Unmarshaller unmarshaller = context.createUnmarshaller();
-        Empresa empresa = (Empresa) unmarshaller.unmarshal(f);
-
-        System.out.println("DATOS DE LA EMPRESA");
-        System.out.println("ID: " + empresa.getId());
-        System.out.println("Nombre: " + empresa.getNombre());
-        System.out.println("Servicio: " + empresa.getServicio());
-        System.out.println("Telefono: " + empresa.getTelefono());
-        System.out.println("-----------------------------------");
+        return (Empresa) unmarshaller.unmarshal(f);
     }
 
-    public static void crearEmpleado(Empleado Enuevo, File f) throws JAXBException, IOException {
+    // Añade un nuevo empleado a la lista de la empresa y guarda el XML
+    public static boolean crearEmpleado(Empleado eNuevo, File f) throws JAXBException, IOException {
         JAXBContext context = JAXBContext.newInstance(Empresa.class);
-        Unmarshaller unmarshaller = context.createUnmarshaller();
-        Empresa empresa = (Empresa) unmarshaller.unmarshal(f);
-
-        empresa.getEmpleados().add(Enuevo);
-
+        Empresa empresa = leerEmpresa(f);
+        empresa.getEmpleados().add(eNuevo);
         guardarXML(empresa, f, context);
-        System.out.println("Empleado creado y guardado con exito.");
+        return true;
     }
 
-    public static void crearCliente(Cliente Cnuevo, File f) throws JAXBException, IOException {
+    // Añade un nuevo cliente a la lista de la empresa y guarda el XML
+    public static boolean crearCliente(Cliente cNuevo, File f) throws JAXBException, IOException {
         JAXBContext context = JAXBContext.newInstance(Empresa.class);
-        Unmarshaller unmarshaller = context.createUnmarshaller();
-        Empresa empresa = (Empresa) unmarshaller.unmarshal(f);
-
-        empresa.getClientes().add(Cnuevo);
-
+        Empresa empresa = leerEmpresa(f);
+        empresa.getClientes().add(cNuevo);
         guardarXML(empresa, f, context);
-        System.out.println("Cliente creado y guardado con exito.");
+        return true;
     }
 
-    public static void leerEmpleado(Empleado Eleer, File f) throws JAXBException, IOException {
-        JAXBContext context = JAXBContext.newInstance(Empresa.class);
-        Unmarshaller unmarshaller = context.createUnmarshaller();
-        Empresa empresa = (Empresa) unmarshaller.unmarshal(f);
-
-        boolean encontrado = false;
+    // Busca un empleado por su ID y lo devuelve si lo encuentra
+    public static Empleado leerEmpleado(int id, File f) throws JAXBException {
+        Empresa empresa = leerEmpresa(f);
         for (Empleado e : empresa.getEmpleados()) {
-            if (e.getId().equals(Eleer.getId()) || e.getDni().equals(Eleer.getDni())) {
-                System.out.println("EMPLEADO ENCONTRADO");
-                System.out.println("ID: " + e.getId() + " | DNI: " + e.getDni() + " | Nombre: " + e.getNombre() +
-                        " | Tel: " + e.getTelefono() + " | Loc: " + e.getLocalidad() + " | Edad: " + e.getEdad() +
-                        " | Puesto: " + e.getPuesto() + " | Salario: " + e.getSalario());
-                encontrado = true;
-                break;
+            if (e.getId() == id) { // Comparación de enteros
+                return e;
             }
         }
-        if (!encontrado) {
-            System.out.println("No se encontro el empleado especificado.");
-        }
+        return null;
     }
 
-    public static void leerCliente(Cliente Cleer, File f) throws JAXBException, IOException {
-        JAXBContext context = JAXBContext.newInstance(Empresa.class);
-        Unmarshaller unmarshaller = context.createUnmarshaller();
-        Empresa empresa = (Empresa) unmarshaller.unmarshal(f);
-
-        boolean encontrado = false;
+    // Busca un cliente por su ID y lo devuelve si lo encuentra
+    public static Cliente leerCliente(int id, File f) throws JAXBException {
+        Empresa empresa = leerEmpresa(f);
         for (Cliente c : empresa.getClientes()) {
-            if (c.getId().equals(Cleer.getId()) || c.getDni().equals(Cleer.getDni())) {
-                System.out.println("CLIENTE ENCONTRADO");
-                System.out.println("ID: " + c.getId() + " | DNI: " + c.getDni() + " | Nombre: " + c.getNombre() +
-                        " | Tel: " + c.getTelefono() + " | Loc: " + c.getLocalidad() + " | Edad: " + c.getEdad() +
-                        " | Premium: " + c.getPremium());
-                encontrado = true;
-                break;
+            if (c.getId() == id) { // Comparación de enteros
+                return c;
             }
         }
-        if (!encontrado) {
-            System.out.println("No se encontro el cliente especificado.");
-        }
+        return null;
     }
 
-    public static void leerEmpleados(File f) throws JAXBException {
-        JAXBContext context = JAXBContext.newInstance(Empresa.class);
-        Unmarshaller unmarshaller = context.createUnmarshaller();
-        Empresa empresa = (Empresa) unmarshaller.unmarshal(f);
+    // Devuelve la lista completa de empleados
+    public static List<Empleado> leerEmpleados(File f) throws JAXBException {
+        Empresa empresa = leerEmpresa(f);
+        return empresa.getEmpleados();
+    }
 
-        System.out.println("LISTA DE EMPLEADOS");
+    // Devuelve la lista completa de clientes
+    public static List<Cliente> leerClientes(File f) throws JAXBException {
+        Empresa empresa = leerEmpresa(f);
+        return empresa.getClientes();
+    }
+
+    // Elimina un empleado por su ID y actualiza el archivo XML
+    public static boolean borrarEmpleado(int id, File f) throws JAXBException, IOException {
+        JAXBContext context = JAXBContext.newInstance(Empresa.class);
+        Empresa empresa = leerEmpresa(f);
+
+        Empleado aBorrar = null;
         for (Empleado e : empresa.getEmpleados()) {
-            System.out.println("ID: " + e.getId() + " | Nombre: " + e.getNombre() + " | Puesto: " + e.getPuesto() + " | Salario: " + e.getSalario());
+            if (e.getId() == id) { // Comparación de enteros
+                aBorrar = e;
+                break;
+            }
         }
-        System.out.println("-----------------------------------");
+
+        if (aBorrar != null) {
+            empresa.getEmpleados().remove(aBorrar);
+            guardarXML(empresa, f, context);
+            return true;
+        }
+        return false;
     }
 
-    public static void leerClientes(File f) throws JAXBException {
+    // Elimina un cliente por su ID y actualiza el archivo XML
+    public static boolean borrarCliente(int id, File f) throws JAXBException, IOException {
         JAXBContext context = JAXBContext.newInstance(Empresa.class);
-        Unmarshaller unmarshaller = context.createUnmarshaller();
-        Empresa empresa = (Empresa) unmarshaller.unmarshal(f);
+        Empresa empresa = leerEmpresa(f);
 
-        System.out.println("LISTA DE CLIENTES");
+        Cliente aBorrar = null;
         for (Cliente c : empresa.getClientes()) {
-            System.out.println("ID: " + c.getId() + " | Nombre: " + c.getNombre() + " | Localidad: " + c.getLocalidad() + " | Premium: " + c.getPremium());
+            if (c.getId() == id) { // Comparación de enteros
+                aBorrar = c;
+                break;
+            }
         }
-        System.out.println("-----------------------------------");
-    }
 
-    public static void borrarEmpleado(Empleado Eborrar, File f) throws JAXBException, IOException {
-        JAXBContext context = JAXBContext.newInstance(Empresa.class);
-        Unmarshaller unmarshaller = context.createUnmarshaller();
-        Empresa empresa = (Empresa) unmarshaller.unmarshal(f);
-
-        boolean eliminado = empresa.getEmpleados().removeIf(e -> 
-            e.getId().equals(Eborrar.getId()) || e.getDni().equals(Eborrar.getDni())
-        );
-        
-        if (eliminado) {
+        if (aBorrar != null) {
+            empresa.getClientes().remove(aBorrar);
             guardarXML(empresa, f, context);
-            System.out.println("Empleado borrado correctamente.");
-        } else {
-            System.out.println("No se encontro el empleado a borrar.");
+            return true;
         }
+        return false;
     }
 
-    public static void borrarCliente(Cliente Cborrar, File f) throws JAXBException, IOException {
+    // Busca un empleado por su ID, actualiza sus datos y guarda el XML
+    public static boolean modificarEmpleado(int id, Empleado eModificar, File f) throws JAXBException, IOException {
         JAXBContext context = JAXBContext.newInstance(Empresa.class);
-        Unmarshaller unmarshaller = context.createUnmarshaller();
-        Empresa empresa = (Empresa) unmarshaller.unmarshal(f);
+        Empresa empresa = leerEmpresa(f);
 
-        boolean eliminado = empresa.getClientes().removeIf(c -> 
-            c.getId().equals(Cborrar.getId()) || c.getDni().equals(Cborrar.getDni())
-        );
-
-        if (eliminado) {
-            guardarXML(empresa, f, context);
-            System.out.println("Cliente borrado correctamente.");
-        } else {
-            System.out.println("No se encontro el cliente a borrar.");
-        }
-    }
-
-    public static void modificarEmpleado(Empleado Emodificar, File f) throws JAXBException, IOException {
-        JAXBContext context = JAXBContext.newInstance(Empresa.class);
-        Unmarshaller unmarshaller = context.createUnmarshaller();
-        Empresa empresa = (Empresa) unmarshaller.unmarshal(f);
-
-        boolean modificado = false;
         for (Empleado e : empresa.getEmpleados()) {
-            if (e.getId().equals(Emodificar.getId())) {
-                e.setDni(Emodificar.getDni());
-                e.setNombre(Emodificar.getNombre());
-                e.setTelefono(Emodificar.getTelefono());
-                e.setLocalidad(Emodificar.getLocalidad());
-                e.setEdad(Emodificar.getEdad());
-                e.setPuesto(Emodificar.getPuesto());
-                e.setSalario(Emodificar.getSalario());
-                modificado = true;
-                break;
+            if (e.getId() == id) { // Comparación de enteros
+                e.setDni(eModificar.getDni());
+                e.setNombre(eModificar.getNombre());
+                e.setTelefono(eModificar.getTelefono());
+                e.setLocalidad(eModificar.getLocalidad());
+                e.setEdad(eModificar.getEdad());
+                e.setPuesto(eModificar.getPuesto());
+                e.setSalario(eModificar.getSalario());
+                guardarXML(empresa, f, context);
+                return true;
             }
         }
-
-        if (modificado) {
-            guardarXML(empresa, f, context);
-            System.out.println("Empleado modificado correctamente.");
-        } else {
-            System.out.println("No se encontró el empleado para modificar.");
-        }
+        return false;
     }
 
-    public static void modificarCliente(Cliente Cmodificar, File f) throws JAXBException, IOException {
+    // Busca un cliente por su ID, actualiza sus datos y guarda el XML
+    public static boolean modificarCliente(int id, Cliente cModificar, File f) throws JAXBException, IOException {
         JAXBContext context = JAXBContext.newInstance(Empresa.class);
-        Unmarshaller unmarshaller = context.createUnmarshaller();
-        Empresa empresa = (Empresa) unmarshaller.unmarshal(f);
+        Empresa empresa = leerEmpresa(f);
 
-        boolean modificado = false;
         for (Cliente c : empresa.getClientes()) {
-            if (c.getId().equals(Cmodificar.getId())) {
-                c.setDni(Cmodificar.getDni());
-                c.setNombre(Cmodificar.getNombre());
-                c.setTelefono(Cmodificar.getTelefono());
-                c.setLocalidad(Cmodificar.getLocalidad());
-                c.setEdad(Cmodificar.getEdad());
-                c.setPremium(Cmodificar.getPremium());
-                modificado = true;
-                break;
+            if (c.getId() == id) { // Comparación de enteros
+                c.setDni(cModificar.getDni());
+                c.setNombre(cModificar.getNombre());
+                c.setTelefono(cModificar.getTelefono());
+                c.setLocalidad(cModificar.getLocalidad());
+                c.setEdad(cModificar.getEdad());
+                c.setPremium(cModificar.getPremium());
+                guardarXML(empresa, f, context);
+                return true;
             }
         }
-
-        if (modificado) {
-            guardarXML(empresa, f, context);
-            System.out.println("Cliente modificado correctamente.");
-        } else {
-            System.out.println("No se encontro el cliente para modificar.");
-        }
+        return false;
     }
 
+    // Método auxiliar privado para guardar el objeto Empresa en el archivo XML
     private static void guardarXML(Empresa empresa, File f, JAXBContext context) throws JAXBException, IOException {
         Marshaller marshaller = context.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
