@@ -47,5 +47,22 @@ private Scanner sc = new Scanner(System.in);
         System.out.println("Servicio: " + empresa.getServicio());
         System.out.println("Teléfono: " + empresa.getTelefono());
     }
-    
+
+    public void mostrarClientes(List<Cliente> clientes) {
+        System.out.println("\n===== LISTADO DE CLIENTES =====");
+        for (Cliente cliente : clientes) {
+            mostrarCliente(cliente);
+            System.out.println("------------------------------");
+        }
+    }
+
+    public void mostrarCliente(Cliente cliente) {
+        System.out.println("ID: " + cliente.getId());
+        System.out.println("DNI: " + cliente.getDni());
+        System.out.println("Nombre: " + cliente.getNombre());
+        System.out.println("Teléfono: " + cliente.getTelefono());
+        System.out.println("Localidad: " + cliente.getLocalidad());
+        System.out.println("Edad: " + cliente.getEdad());
+        System.out.println("Premium: " + cliente.getPremium());
+    }
 }
