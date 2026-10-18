@@ -160,8 +160,7 @@ public class Manipulador {
     public boolean modificarEmpleado(Empleado eModificar)
             throws JAXBException, IOException {
 
-        vista.mostrarMensaje("Introduce el ID del empleado que quieres modificar:");
-        int id = vista.pedirId();
+        int id = eModificar.getId();
 
         JAXBContext context = JAXBContext.newInstance(Empresa.class);
         Empresa empresa = leerEmpresa();
@@ -190,8 +189,7 @@ public class Manipulador {
     public boolean modificarCliente(Cliente cModificar)
             throws JAXBException, IOException {
 
-        vista.mostrarMensaje("Introduce el ID del cliente que quieres modificar:");
-        int id = vista.pedirId();
+        int id = cModificar.getId();
 
         JAXBContext context = JAXBContext.newInstance(Empresa.class);
         Empresa empresa = leerEmpresa();
