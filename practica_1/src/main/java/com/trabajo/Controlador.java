@@ -1,5 +1,7 @@
 package com.trabajo;
 
+import java.io.IOException;
+import javax.xml.bind.JAXBException;
 
 public class Controlador {
     private Manipulador manipulador;
@@ -11,7 +13,7 @@ public class Controlador {
     }
 
   // Método para iniciar el flujo de la aplicación
-    public void start(){
+    public void start()throws JAXBException, IOException{
 
         int opcion;
 
@@ -48,11 +50,11 @@ public class Controlador {
                     break;
 
                 case 8:
-                    manipulador.borrarCliente(vista.recogerClienteABorrar());
+                    manipulador.borrarCliente();
                     break;
                 
                 case 9: 
-                    manipulador.borrarEmpleado(vista.recogerEmpleadoABorrar());
+                    manipulador.borrarEmpleado();
                     break;
                 
                 case 10:
@@ -76,6 +78,6 @@ public class Controlador {
     }
 
 
-    }
+}
 
 
