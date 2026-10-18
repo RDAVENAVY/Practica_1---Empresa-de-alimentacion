@@ -13,65 +13,93 @@ import javax.xml.bind.Unmarshaller;
 
 public class Manipulador {
 
-    // Lee el archivo XML y lo convierte en un objeto Empresa para ser leido
-    public static Empresa leerEmpresa(File f) throws JAXBException {
-        JAXBContext context = JAXBContext.newInstance(Empresa.class);
-        Unmarshaller unmarshaller = context.createUnmarshaller();
-        return (Empresa) unmarshaller.unmarshal(f);
+    //Establecemos ruta al archivo proyecto.xml y creamos una instancia Vista.
+    private  File archivo = new File("proyecto.xml");
+    private  Vista vista;
+
+    public Manipulador(Vista vista) {
+        this.vista = vista;
     }
+
+    // Lee el archivo XML y lo convierte en un objeto Empresa
+    public Empresa leerEmpresa() throws JAXBException {
+    JAXBContext context = JAXBContext.newInstance(Empresa.class);
+    Unmarshaller unmarshaller = context.createUnmarshaller();
+
+    return (Empresa) unmarshaller.unmarshal(archivo);
+    }
+    
 
     // Añade un nuevo empleado a la lista de la empresa y guarda el XML
-    public static boolean crearEmpleado(Empleado eNuevo, File f) throws JAXBException, IOException {
+    public boolean crearEmpleado(Empleado eNuevo) throws JAXBException, IOException {
         JAXBContext context = JAXBContext.newInstance(Empresa.class);
-        Empresa empresa = leerEmpresa(f);
+        Empresa empresa = leerEmpresa();
+
         empresa.getEmpleados().add(eNuevo);
-        guardarXML(empresa, f, context);
+
+        guardarXML(empresa, context);
         return true;
     }
 
+  
     // Añade un nuevo cliente a la lista de la empresa y guarda el XML
-    public static boolean crearCliente(Cliente cNuevo, File f) throws JAXBException, IOException {
+    public boolean crearCliente(Cliente cNuevo) throws JAXBException, IOException {
         JAXBContext context = JAXBContext.newInstance(Empresa.class);
-        Empresa empresa = leerEmpresa(f);
+        Empresa empresa = leerEmpresa();
+
         empresa.getClientes().add(cNuevo);
-        guardarXML(empresa, f, context);
+
+        guardarXML(empresa, context);
         return true;
     }
+   
 
-    // Busca un empleado por su ID y lo devuelve si lo encuentra
-    public static Empleado leerEmpleado(int id, File f) throws JAXBException {
-        Empresa empresa = leerEmpresa(f);
+   // Busca un empleado por su ID y lo devuelve si lo encuentra. Usamos pedirId() y mostrarMensaje()
+    public Empleado leerEmpleado() throws JAXBException {
+        vista.mostrarMensaje("Introduce el ID del empleado:");
+        int id = vista.pedirId();
+
+        Empresa empresa = leerEmpresa();
+
         for (Empleado e : empresa.getEmpleados()) {
-            if (e.getId() == id) { // Comparación de enteros
+            if (e.getId() == id) {
                 return e;
             }
         }
+
+        vista.mostrarMensaje("No se ha encontrado ningún empleado con ese ID.");
         return null;
     }
 
-    // Busca un cliente por su ID y lo devuelve si lo encuentra
-    public static Cliente leerCliente(int id, File f) throws JAXBException {
-        Empresa empresa = leerEmpresa(f);
+   // Busca un cliente por su ID y lo devuelve si lo encuentra
+    public Cliente leerCliente() throws JAXBException {
+        vista.mostrarMensaje("Introduce el ID del cliente:");
+        int id = vista.pedirId();
+
+        Empresa empresa = leerEmpresa();
+
         for (Cliente c : empresa.getClientes()) {
-            if (c.getId() == id) { // Comparación de enteros
+            if (c.getId() == id) {
                 return c;
             }
         }
+
+        vista.mostrarMensaje("No se ha encontrado ningún cliente con ese ID.");
         return null;
     }
 
     // Devuelve la lista completa de empleados
-    public static List<Empleado> leerEmpleados(File f) throws JAXBException {
-        Empresa empresa = leerEmpresa(f);
+    public List<Empleado> leerEmpleados() throws JAXBException {
+        Empresa empresa = leerEmpresa();
         return empresa.getEmpleados();
     }
 
-    // Devuelve la lista completa de clientes
-    public static List<Cliente> leerClientes(File f) throws JAXBException {
-        Empresa empresa = leerEmpresa(f);
+   // Devuelve la lista completa de clientes
+    public List<Cliente> leerClientes() throws JAXBException {
+        Empresa empresa = leerEmpresa();
         return empresa.getClientes();
     }
-
+---
     // Elimina un empleado por su ID y actualiza el archivo XML
     public static boolean borrarEmpleado(int id, File f) throws JAXBException, IOException {
         JAXBContext context = JAXBContext.newInstance(Empresa.class);
