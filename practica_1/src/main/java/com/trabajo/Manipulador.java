@@ -99,15 +99,19 @@ public class Manipulador {
         Empresa empresa = leerEmpresa();
         return empresa.getClientes();
     }
----
-    // Elimina un empleado por su ID y actualiza el archivo XML
-    public static boolean borrarEmpleado(int id, File f) throws JAXBException, IOException {
+
+   // Elimina un empleado por su ID y actualiza el archivo XML
+    public boolean borrarEmpleado() throws JAXBException, IOException {
+        vista.mostrarMensaje("Introduce el ID del empleado que quieres borrar:");
+        int id = vista.pedirId();
+
         JAXBContext context = JAXBContext.newInstance(Empresa.class);
-        Empresa empresa = leerEmpresa(f);
+        Empresa empresa = leerEmpresa();
 
         Empleado aBorrar = null;
+
         for (Empleado e : empresa.getEmpleados()) {
-            if (e.getId() == id) { // Comparación de enteros
+            if (e.getId() == id) {
                 aBorrar = e;
                 break;
             }
@@ -115,20 +119,27 @@ public class Manipulador {
 
         if (aBorrar != null) {
             empresa.getEmpleados().remove(aBorrar);
-            guardarXML(empresa, f, context);
+            guardarXML(empresa, context);
+            vista.mostrarMensaje("Empleado eliminado correctamente.");
             return true;
         }
+
+        vista.mostrarMensaje("No se ha encontrado ningún empleado con ese ID.");
         return false;
     }
 
     // Elimina un cliente por su ID y actualiza el archivo XML
-    public static boolean borrarCliente(int id, File f) throws JAXBException, IOException {
+    public boolean borrarCliente() throws JAXBException, IOException {
+        vista.mostrarMensaje("Introduce el ID del cliente que quieres borrar:");
+        int id = vista.pedirId();
+
         JAXBContext context = JAXBContext.newInstance(Empresa.class);
-        Empresa empresa = leerEmpresa(f);
+        Empresa empresa = leerEmpresa();
 
         Cliente aBorrar = null;
+
         for (Cliente c : empresa.getClientes()) {
-            if (c.getId() == id) { // Comparación de enteros
+            if (c.getId() == id) {
                 aBorrar = c;
                 break;
             }
@@ -136,19 +147,27 @@ public class Manipulador {
 
         if (aBorrar != null) {
             empresa.getClientes().remove(aBorrar);
-            guardarXML(empresa, f, context);
+            guardarXML(empresa, context);
+            vista.mostrarMensaje("Cliente eliminado correctamente.");
             return true;
         }
+
+        vista.mostrarMensaje("No se ha encontrado ningún cliente con ese ID.");
         return false;
     }
 
     // Busca un empleado por su ID, actualiza sus datos y guarda el XML
-    public static boolean modificarEmpleado(int id, Empleado eModificar, File f) throws JAXBException, IOException {
+    public boolean modificarEmpleado(Empleado eModificar)
+            throws JAXBException, IOException {
+
+        vista.mostrarMensaje("Introduce el ID del empleado que quieres modificar:");
+        int id = vista.pedirId();
+
         JAXBContext context = JAXBContext.newInstance(Empresa.class);
-        Empresa empresa = leerEmpresa(f);
+        Empresa empresa = leerEmpresa();
 
         for (Empleado e : empresa.getEmpleados()) {
-            if (e.getId() == id) { // Comparación de enteros
+            if (e.getId() == id) {
                 e.setDni(eModificar.getDni());
                 e.setNombre(eModificar.getNombre());
                 e.setTelefono(eModificar.getTelefono());
@@ -156,39 +175,60 @@ public class Manipulador {
                 e.setEdad(eModificar.getEdad());
                 e.setPuesto(eModificar.getPuesto());
                 e.setSalario(eModificar.getSalario());
-                guardarXML(empresa, f, context);
+
+                guardarXML(empresa, context);
+                vista.mostrarMensaje("Empleado modificado correctamente.");
                 return true;
             }
         }
+
+        vista.mostrarMensaje("No se ha encontrado ningún empleado con ese ID.");
         return false;
     }
-
+        
     // Busca un cliente por su ID, actualiza sus datos y guarda el XML
-    public static boolean modificarCliente(int id, Cliente cModificar, File f) throws JAXBException, IOException {
+    public boolean modificarCliente(Cliente cModificar)
+            throws JAXBException, IOException {
+
+        vista.mostrarMensaje("Introduce el ID del cliente que quieres modificar:");
+        int id = vista.pedirId();
+
         JAXBContext context = JAXBContext.newInstance(Empresa.class);
-        Empresa empresa = leerEmpresa(f);
+        Empresa empresa = leerEmpresa();
 
         for (Cliente c : empresa.getClientes()) {
-            if (c.getId() == id) { // Comparación de enteros
+            if (c.getId() == id) {
                 c.setDni(cModificar.getDni());
                 c.setNombre(cModificar.getNombre());
                 c.setTelefono(cModificar.getTelefono());
                 c.setLocalidad(cModificar.getLocalidad());
                 c.setEdad(cModificar.getEdad());
                 c.setPremium(cModificar.getPremium());
-                guardarXML(empresa, f, context);
+
+                guardarXML(empresa, context);
+                vista.mostrarMensaje("Cliente modificado correctamente.");
                 return true;
             }
         }
+
+        vista.mostrarMensaje("No se ha encontrado ningún cliente con ese ID.");
         return false;
     }
 
-    // Método auxiliar privado para guardar el objeto Empresa en el archivo XML
-    private static void guardarXML(Empresa empresa, File f, JAXBContext context) throws JAXBException, IOException {
+    // Guarda el objeto Empresa en el archivo XML
+    private void guardarXML(Empresa empresa, JAXBContext context)
+            throws JAXBException, IOException {
+
         Marshaller marshaller = context.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
         marshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
         marshaller.setProperty(Marshaller.JAXB_FRAGMENT, false);
-        marshaller.marshal(empresa, new FileWriter(f, StandardCharsets.UTF_8));
+
+        try (FileWriter writer =
+                new FileWriter(archivo, StandardCharsets.UTF_8)) {
+            marshaller.marshal(empresa, writer);
+        }
     }
+
+
 }
