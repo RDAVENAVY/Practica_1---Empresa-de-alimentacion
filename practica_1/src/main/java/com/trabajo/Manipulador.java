@@ -67,7 +67,7 @@ public class Manipulador {
             }
         }
 
-        vista.mostrarMensaje("No se ha encontrado ningún empleado con ese ID.");
+        
         return null;
     }
 
@@ -84,7 +84,7 @@ public class Manipulador {
             }
         }
 
-        vista.mostrarMensaje("No se ha encontrado ningún cliente con ese ID.");
+       
         return null;
     }
 

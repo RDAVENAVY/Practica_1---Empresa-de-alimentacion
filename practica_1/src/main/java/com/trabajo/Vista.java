@@ -57,6 +57,10 @@ private Scanner sc = new Scanner(System.in);
     }
 
     public void mostrarCliente(Cliente cliente) {
+        if (cliente == null) {
+        System.out.println("No se ha encontrado ningún cliente con ese ID.");
+        return;
+        }
         System.out.println("ID: " + cliente.getId());
         System.out.println("DNI: " + cliente.getDni());
         System.out.println("Nombre: " + cliente.getNombre());
@@ -75,6 +79,11 @@ private Scanner sc = new Scanner(System.in);
     }
 
     public void mostrarEmpleado(Empleado empleado) {
+
+        if (empleado == null) {
+        System.out.println("No se ha encontrado ningún empleado con ese ID.");
+        return;
+        }
         System.out.println("ID: " + empleado.getId());
         System.out.println("DNI: " + empleado.getDni());
         System.out.println("Nombre: " + empleado.getNombre());
