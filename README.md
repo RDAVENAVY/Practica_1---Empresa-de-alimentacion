@@ -5,7 +5,7 @@ PATTO | Empresa de alimentación
 </p>
 
 ## Descripción
-PATTO es una aplicación de consola desarrollada en Java en el contexto de una práctica académica. El proyecto consiste en gestionar la información de una empresa de alimentación, sus clientes y sus empleados.
+El proyecto consiste en gestionar la información de una empresa de alimentación, sus clientes y sus empleados.
 La práctica reúne conceptos de programación orientada a objetos, organización del código mediante el patrón Modelo‑Vista‑Controlador (MVC) y persistencia de datos en archivos XML utilizando JAXB.
   
 ## Tecnologías utilizadas
