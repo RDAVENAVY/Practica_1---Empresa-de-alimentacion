@@ -130,19 +130,6 @@ private Scanner sc = new Scanner(System.in);
         return new Empleado(id, dni, nombre, telefono, localidad, edad, puesto, salario);
     }
 
-    public int recogerClienteABorrar() {
-        System.out.print("ID del cliente que quieres borrar: ");
-        int id = sc.nextInt();
-        sc.nextLine();
-        return id;
-    }
-
-    public int recogerEmpleadoABorrar() {
-        System.out.print("ID del empleado que quieres borrar: ");
-        int id = sc.nextInt();
-        sc.nextLine();
-        return id;
-    }
 
     public Empleado recogerEmpleadoAModificar() {
         System.out.println("\n===== MODIFICAR EMPLEADO =====");
