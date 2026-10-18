@@ -188,4 +188,17 @@ private Scanner sc = new Scanner(System.in);
         sc.nextLine();
         return new Cliente(id, dni, nombre, telefono, localidad, edad, premium);
     }
+    
+    //Método para pedir Id
+    public int pedirId() {
+
+        while (!sc.hasNextInt()) {
+            sc.nextLine();
+            System.out.println("Introduce un ID válido (número entero):");
+        }
+
+        int id = sc.nextInt();
+        sc.nextLine();
+        return id;
+    }
 }
